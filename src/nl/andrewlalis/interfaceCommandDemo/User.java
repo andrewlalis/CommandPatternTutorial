@@ -1,4 +1,4 @@
-package nl.andrewlalis;
+package nl.andrewlalis.interfaceCommandDemo;
 
 /**
  * The User class represents some generic object with some instance variables.

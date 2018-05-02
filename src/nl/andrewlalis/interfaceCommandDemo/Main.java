@@ -1,8 +1,8 @@
-package nl.andrewlalis;
+package nl.andrewlalis.interfaceCommandDemo;
 
-import nl.andrewlalis.commands.AgeCommand;
-import nl.andrewlalis.commands.RenameCommand;
-import nl.andrewlalis.commands.ToggleOnlineCommand;
+import nl.andrewlalis.interfaceCommandDemo.commands.AgeCommand;
+import nl.andrewlalis.interfaceCommandDemo.commands.RenameCommand;
+import nl.andrewlalis.interfaceCommandDemo.commands.ToggleOnlineCommand;
 
 import java.util.ArrayList;
 import java.util.List;

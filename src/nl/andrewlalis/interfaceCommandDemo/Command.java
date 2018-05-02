@@ -1,4 +1,4 @@
-package nl.andrewlalis;
+package nl.andrewlalis.interfaceCommandDemo;
 
 public interface Command {
 

@@ -1,3 +1,5 @@
+package nl.andrewlalis.abstractClassDemo;
+
 import java.util.Date;
 
 /**

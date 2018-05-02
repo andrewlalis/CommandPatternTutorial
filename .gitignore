@@ -24,3 +24,8 @@ hs_err_pid*
 # Intellij Files
 .idea
 *.iml
+
+# Latex Files
+*.aux
+*.out
+*.log

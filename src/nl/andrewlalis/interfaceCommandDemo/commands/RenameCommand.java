@@ -1,7 +1,7 @@
-package nl.andrewlalis.commands;
+package nl.andrewlalis.interfaceCommandDemo.commands;
 
-import nl.andrewlalis.Command;
-import nl.andrewlalis.User;
+import nl.andrewlalis.interfaceCommandDemo.Command;
+import nl.andrewlalis.interfaceCommandDemo.User;
 
 public class RenameCommand implements Command {
 

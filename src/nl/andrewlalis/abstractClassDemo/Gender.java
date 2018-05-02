@@ -1,3 +1,5 @@
+package nl.andrewlalis.abstractClassDemo;
+
 public enum Gender {
 	/* Defining the relevant enums */
 	MALE("Male"),
