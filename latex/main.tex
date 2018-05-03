@@ -52,19 +52,20 @@
     	\subsection{Definition}
     		\href{https://docs.oracle.com/javase/tutorial/java/concepts/interface.html}{Oracle Java Interface Tutorial}
 
-    		In the most literal sense, an interface is a list of unimplemented methods that should all be related to each other.
+    		In the most literal sense, an interface is a list of unimplemented methods that should all be related to each other. When an object \textit{implements} an interface, it promises that it will provide behavior for the methods that the interface defines.
 
-    		When an object \textit{implements} an interface, it promises that it will provide behavior for the methods that the interface defines.
+    	\subsection{Example}
+    		This allows for very useful behavior: Two potentially unrelated classes may implement a common interface, allowing them to be interpreted simply as two arbitrary objects that both have some common methods, thanks to the interface. For example, suppose you are making a video game and need your player to interact with things that have items, like a chest, another player, an NPC, but not with objects such as stones or trees. Without interfaces, we would have have each of these objects inherit from some superclass which defines how to take and give items to these objects. However, conceptually a player is not very related to a tree.
 
-    		This allows for very useful behavior: Two potentially unrelated classes may implement a common interface, allowing them to be interpreted simply as two arbitrary objects that both have some common methods, thanks to the interface.
+    		\includegraphics[width=\textwidth]{images/interfaces/classesWithSuperclass.png}
 
-    		For example, suppose you are making a video game and need your player to interact with things that have items, like a chest, another player, an NPC, or perhaps some stones or trees. 
+    		To avoid some unintuitive inheritance structure, we can instead introduce an interface which defines methods such as \verb|takeItem(Item item)| and \verb|giveItem(Item item)|. With our new \verb|Tradeable| interface, \textit{or whatever you want to name it, just something descriptive}, each of these objects can now promise that it will implement these methods so that they can be called on a player, a chest, or an NPC.
 
-    		Without interfaces, we would have have each of these objects inherit from some superclass which defines how to take and give items to these objects. However, conceptually a player is not very related to a tree. 
+    		\includegraphics[width=\textwidth]{images/interfaces/classesWithInterface.png}
 
-    		To avoid some unintuitive inheritance structure, we can instead introduce an interface which defines methods such as \verb|takeItem(Item item)| and \verb|giveItem(Item item)|.
+    	\subsection{Command Pattern}
+    		This is only one of many cases where interfaces are the best design choice to make clean, understandable code with a logical type hierarchy. One other application of interfaces is explored in the \href{https://github.com/andrewlalis/CommandPatternTutorial}{command pattern example}. Here, you'll find an example where many \textit{commands} implement the \verb|Command| interface, allowing them to be put in a list and executed arbitrarily. This is useful in many applications and perhaps even the text-based RPG game. Feel free to clone the repository and play around with the code!
 
-    		With our new \verb|Tradeable| interface, \textit{or whatever you want to name it, just something descriptive}, each of these objects can now promise that it will implement these methods so that they can be called on a player, a chest, an NPC, or a stone.
-
+    		\includegraphics[width=\textwidth]{images/interfaces/commandPattern.png}
 
 \end{document}
