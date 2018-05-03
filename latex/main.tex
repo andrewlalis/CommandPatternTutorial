@@ -1,9 +1,25 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,
 		urlcolor=blue}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+	basicstyle=\footnotesize,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{mygreen},
+	keywordstyle=\color{blue},
+	stringstyle=\color{mymauve},
+}
+
 \begin{document}
 
     \title{Abstract Classes and Interfaces: Practical Examples}
@@ -46,6 +62,8 @@
 
             \includegraphics[scale=0.71]{images/output.png}
 
+            To see the source code for this example, and play around with it, check out the \href{https://github.com/andrewlalis/CommandPatternTutorial}{GitHub repository} online!
+
     \newpage
 
     \section{Interfaces}
@@ -67,5 +85,87 @@
     		This is only one of many cases where interfaces are the best design choice to make clean, understandable code with a logical type hierarchy. One other application of interfaces is explored in the \href{https://github.com/andrewlalis/CommandPatternTutorial}{command pattern example}. Here, you'll find an example where many \textit{commands} implement the \verb|Command| interface, allowing them to be put in a list and executed arbitrarily. This is useful in many applications and perhaps even the text-based RPG game. Feel free to clone the repository and play around with the code!
 
     		\includegraphics[width=\textwidth]{images/interfaces/commandPattern.png}
+
+	    	\subsubsection{Structure}
+	    		In the Command Pattern example, our \verb|Command| interface represents any command that can be applied to a \verb|User| object.
+
+	    		\begin{lstlisting}[language=java]
+/**
+ * The User class represents some generic object with some instance variables.
+ * It acts as the 'receiver' in the command pattern, because the purpose of
+ * commands is to modify the receiver.
+ */
+public class User {
+
+    private String name;
+    private int age;
+    private boolean online;
+	    		\end{lstlisting}
+
+	    		Commands which act on this \verb|User| implement the \verb|Command| interface, shown below.
+
+	    		\begin{lstlisting}[language=java]
+public interface Command {
+
+    //Execute some action, with a user object that acts as the receiver.
+    void execute(User user);
+
+}
+	    		\end{lstlisting}
+
+	    		For simplicity's sake, only one of the \textit{concrete} commands will be shown here. The others are available via the \href{https://github.com/andrewlalis/CommandPatternTutorial}{GitHub repository}.
+
+	    		\begin{lstlisting}[language=java]
+public class AgeCommand implements Command {
+
+    @Override
+    public void execute(User user) {
+        user.setAge(user.getAge()+1);
+        System.out.println("User's age has increased to " + user.getAge());
+    }
+}
+	    		\end{lstlisting}
+
+	    		This command, when executed, will increment a given user's age, and print some information about that.
+
+		    \subsubsection{Test it!}
+	    		To test these commands, the following code will create a list of all possible commands, then create a user. 10 random commands will be executed on the user, and the output will be printed to the console.
+
+	    		\begin{lstlisting}[language=java]
+//Create a list of many commands to execute.
+List<Command> commands = new ArrayList<>();
+
+//Add an instance of each type of command.
+commands.add(new AgeCommand());
+commands.add(new RenameCommand());
+commands.add(new ToggleOnlineCommand());
+
+//Random object to select commands.
+Random rand = new Random();
+
+//Create a user to act as the receiver. Commands will execute and perform an action on the receiver.
+User user = new User("A", 25, false);
+
+//Perform 10 random commands on the user.
+for (int i = 0; i < 10; i++){
+    Command commandToExecute = commands.get(rand.nextInt(commands.size()));
+    commandToExecute.execute(user);
+}
+	    		\end{lstlisting}
+
+	    		The output of running this is:
+
+	    		\begin{lstlisting}
+User's age has increased to 26
+User's age has increased to 27
+Changed name to: AA
+Changed name to: AAAA
+User is now online.
+User is now offline.
+Changed name to: AAAAAAAA
+Changed name to: AAAAAAAAAAAAAAAA
+Changed name to: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+User's age has increased to 28
+	    		\end{lstlisting}
 
 \end{document}
