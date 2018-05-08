@@ -4,8 +4,8 @@ import nl.andrewlalis.interfaceCommandDemo.commands.AgeCommand;
 import nl.andrewlalis.interfaceCommandDemo.commands.RenameCommand;
 import nl.andrewlalis.interfaceCommandDemo.commands.ToggleOnlineCommand;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Main {
@@ -13,12 +13,12 @@ public class Main {
     public static void main(String[] args){
 
         //Create a list of many commands to execute.
-        List<Command> commands = new ArrayList<>();
+        Map<String, Command> commands = new HashMap<>();
 
         //Add an instance of each type of command.
-        commands.add(new AgeCommand());
-        commands.add(new RenameCommand());
-        commands.add(new ToggleOnlineCommand());
+        commands.put("incrementAge", new AgeCommand());
+        commands.put("rename", new AgeCommand());
+        commands.put("toggleOnline", new AgeCommand());
 
         //Random object to select commands.
         Random rand = new Random();
@@ -26,10 +26,16 @@ public class Main {
         //Create a user to act as the receiver. Commands will execute and perform an action on the receiver.
         User user = new User("A", 25, false);
 
-        //Perform 10 random commands on the user.
-        for (int i = 0; i < 10; i++){
-            Command commandToExecute = commands.get(rand.nextInt(commands.size()));
-            commandToExecute.execute(user);
+        Scanner input = new Scanner(System.in);
+        String line;
+
+        while (!line.equals("exit")){
+            line = input.nextLine().toLowerCase();
+            if (!commands.containsKey(line)){
+                System.err.println("Unknown command.");
+            } else {
+                commands.get(line).execute(user);
+            }
         }
 
     }
